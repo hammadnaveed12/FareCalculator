@@ -30,9 +30,14 @@ public class FareCalculator {
     private JMenuItem green;
     private JMenuItem yellow;
     
-    private JLabel departLabel;
-    private JComboBox departCombo;
+    private JLabel departPunjabLabel;
+    private JComboBox departPunjabCombo;
     
+    private JLabel departSindhLabel;
+    private JComboBox departSindhCombo;
+    
+    private JLabel provinceLabel;
+    private JComboBox provinceCombo;
     
     private JLabel Class;
     private JCheckBox economy;
@@ -109,10 +114,20 @@ public class FareCalculator {
             }
         });
         
-        departLabel = new JLabel("Departure City: ");
-        departCombo = new JComboBox();
-        departCombo.addItem("Lahore");
-        departCombo.addItem("Peshawar");
+        departPunjabLabel = new JLabel("Departure City: ");
+        departPunjabCombo = new JComboBox();
+        departPunjabCombo.addItem("Lahore");
+        departPunjabCombo.addItem("Sialkot");
+        
+        departSindhLabel = new JLabel("Departure City: ");
+        departSindhCombo = new JComboBox();
+        departSindhCombo.addItem("Karachi");
+        departSindhCombo.addItem("Hyderabad");
+        
+        provinceLabel = new JLabel("Province: ");
+        provinceCombo = new JComboBox();
+        provinceCombo.addItem("Punjab");
+        provinceCombo.addItem("Sindh");
         
         Class = new JLabel("Class");
         economy = new JCheckBox("Economy");
@@ -146,7 +161,8 @@ public class FareCalculator {
                     }
                     else {
                         seatNum = Integer.parseInt(seatText.getText().trim());
-                        if (departCombo.getSelectedItem() == "Lahore" ) {
+                        if(provinceCombo.getSelectedItem()=="Punjab") {
+                        if (departPunjabCombo.getSelectedItem() == "Lahore" ) {
                             if (arrCombo.getSelectedItem() == "Islamabad") {
                                 eco = 500;
                                 acClass = 1000;
@@ -191,7 +207,7 @@ public class FareCalculator {
                         file.close();
                         }
                         
-                        else if (departCombo.getSelectedItem() == "Peshawar" ) {
+                        else if (departPunjabCombo.getSelectedItem() == "Sialkot" ) {
                             if (arrCombo.getSelectedItem() == "Islamabad") {
                                 eco = 500;
                                 acClass = 1000;
@@ -231,6 +247,96 @@ public class FareCalculator {
                                     totalFareText.setText("missing input. Try Again");
                                 }
                             }
+                        }
+                        else if(provinceCombo.getSelectedItem()=="Sindh")
+                 
+                        	if (departPunjabCombo.getSelectedItem() == "Karachi" ) {
+                            if (arrCombo.getSelectedItem() == "Islamabad") {
+                                eco = 600;
+                                acClass = 1100;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                            else if (arrCombo.getSelectedItem() == "Gujranwala") {
+                                eco = 680;
+                                acClass = 1570;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                            else if (arrCombo.getSelectedItem() == "Faisalabad") {
+                                eco = 700;
+                                acClass = 200;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                        FileWriter file = new FileWriter("output.txt");
+                        file.write(totalFareText.getText());
+                        file.close();
+                        }
+                        
+                        else if (departPunjabCombo.getSelectedItem() == "Hyderabad" ) {
+                            if (arrCombo.getSelectedItem() == "Islamabad") {
+                                eco = 500;
+                                acClass = 1000;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                            else if (arrCombo.getSelectedItem() == "Gujranwala") {
+                                eco = 600;
+                                acClass = 1500;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                            else if (arrCombo.getSelectedItem() == "Faisalabad") {
+                                eco = 700;
+                                acClass = 200;
+                                if (economy.isSelected()) {
+                                    totalFareText.setText(String.format("%d", eco*seatNum));
+                                }
+                                else if (AC.isSelected()) {
+                                    totalFareText.setText(String.format("%d", acClass*seatNum));
+                                }
+                                else {
+                                    totalFareText.setText("missing input. Try Again");
+                                }
+                            }
+                        	
+                        }
                         FileWriter file = new FileWriter("output.txt");
                         file.write(totalFareText.getText());
                         file.close();
@@ -253,8 +359,18 @@ public class FareCalculator {
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 0, 30));
         panel3.setBorder(BorderFactory.createEmptyBorder(30, 30, 0, 30));
         panel.setLayout(grdLayout);
-        panel.add(departLabel);
-        panel.add(departCombo);
+        panel.add(provinceLabel);
+        panel.add(provinceCombo);
+        if(provinceCombo.getSelectedItem()=="Sindh") {
+        	
+        	panel.add(departSindhLabel);
+            panel.add(departSindhCombo);
+        }
+        else if(provinceCombo.getSelectedItem()=="Punjab") {
+        panel.add(departPunjabLabel);
+        panel.add(departPunjabCombo);
+        }
+        
         panel1.add(Class);
         panel1.add(economy);
         panel1.add(AC);
